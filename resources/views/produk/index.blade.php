@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('namaPage', 'Produk Multilateral JFX')
+@section('namaPage', 'Data Produk')
 
 @section('main-content')
 @if (session('success'))
@@ -30,8 +30,8 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
-            <h5 class="m-0 text-gray-800 font-weight-bold">{{ __('Produk Multilateral JFX') }}</h5>
-            <a href="{{ route('jfx.create') }}" class="btn btn-primary btn-sm shadow">
+            <h5 class="m-0 text-gray-800 font-weight-bold">{{ __('Data Produk') }}</h5>
+            <a href="{{ route('produk.create') }}" class="btn btn-primary btn-sm shadow">
                 Tambah Produk
             </a>
         </div>
@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($ProdukJFX as $index => $item)
+                    @forelse ($produk as $index => $item)
                     <tr>
                         <td class="text-center align-middle">{{ $index + 1 }}</td>
                         <td class="align-middle">{{ $item->name }}</td>
@@ -57,10 +57,10 @@
                         </td>
                         <td class="align-middle">
                             <div class="d-flex justify-content-center">
-                                <a href="{{ route('jfx.show', $item->id) }}" class="btn btn-sm btn-success w-100 mr-1">
+                                <a href="{{ route('produk.show', $item->id) }}" class="btn btn-sm btn-success w-100 mr-1">
                                     Lihat
                                 </a>
-                                <a href="{{ route('jfx.edit', $item->id) }}" class="btn btn-sm btn-primary w-100 mx-1">
+                                <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-sm btn-primary w-100 mx-1">
                                     Edit
                                 </a>
                                 <!-- Tombol Trigger Modal -->
@@ -88,7 +88,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Batal</button>
-                                            <form action="{{ route('jfx.destroy', $item->id) }}" method="POST">
+                                            <form action="{{ route('produk.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Ya, Hapus</button>

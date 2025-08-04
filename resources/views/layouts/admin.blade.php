@@ -80,8 +80,8 @@
             </div>
 
             <!-- Nav Item - Produk -->
-            <li class="nav-item {{ Nav::isRoute('jfx.*') || Nav::isRoute('spa.*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('jfx.index') }}">
+            <li class="nav-item {{ Nav::isRoute('produk.*') || Nav::isRoute('spa.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('produk.index') }}">
                     <i class="fas fa-box-open"></i>
                     <span>Produk</span>
                 </a>

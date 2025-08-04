@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Jfx extends Model
+class Produk extends Model
 {
     use HasFactory;
 
-    protected $table = 'jfxes';
+    protected $table = 'produkes';
 
     protected $fillable = [
         'name',
@@ -25,12 +25,12 @@ class Jfx extends Model
     {
         parent::boot();
 
-        static::creating(function ($jfx) {
-            $jfx->slug = Str::slug($jfx->name);
+        static::creating(function ($produk) {
+            $produk->slug = Str::slug($produk->name);
         });
 
-        static::updating(function ($jfx) {
-            $jfx->slug = Str::slug($jfx->name);
+        static::updating(function ($produk) {
+            $produk->slug = Str::slug($produk->name);
         });
     }
 }

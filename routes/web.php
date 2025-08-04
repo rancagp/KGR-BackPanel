@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\JfxController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriWakilPialangController;
 use App\Http\Controllers\ProfileWebsiteController;
 use App\Http\Controllers\SpaController;
@@ -24,15 +24,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-// Produk JFX
-Route::prefix('produk/jfx')->name('jfx.')->group(function () {
-    Route::get('/', [JfxController::class, 'index'])->name('index');
-    Route::post('/store', [JfxController::class, 'store'])->name('store');
-    Route::get('/tambah', [JfxController::class, 'create'])->name('create');
-    Route::put('/{id}/update', [JfxController::class, 'update'])->name('update');
-    Route::get('/{id}/edit', [JfxController::class, 'edit'])->name('edit');
-    Route::get('/{id}/show', [JfxController::class, 'show'])->name('show');
-    Route::delete('/{id}/delete', [JfxController::class, 'destroy'])->name('destroy');
+// Produk produk
+Route::prefix('produk')->name('produk.')->group(function () {
+    Route::get('/', [ProdukController::class, 'index'])->name('index');
+    Route::post('/store', [ProdukController::class, 'store'])->name('store');
+    Route::get('/tambah', [ProdukController::class, 'create'])->name('create');
+    Route::put('/{id}/update', [ProdukController::class, 'update'])->name('update');
+    Route::get('/{id}/edit', [ProdukController::class, 'edit'])->name('edit');
+    Route::get('/{id}', [ProdukController::class, 'show'])->name('show');
+    Route::delete('/{id}/delete', [ProdukController::class, 'destroy'])->name('destroy');
 });
 
 // Produk SPA

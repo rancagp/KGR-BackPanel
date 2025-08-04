@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jfx;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class JfxController extends Controller
+class ProdukController extends Controller
 {
     public function __construct()
     {
@@ -15,26 +15,26 @@ class JfxController extends Controller
 
     public function index()
     {
-        $ProdukJFX = Jfx::all();
-        $countProduk = Jfx::count();
+        $produk = Produk::all();
+        $countProduk = $produk->count();
 
-        return view('jfx.index', compact('ProdukJFX', 'countProduk'));
+        return view('produk.index', compact('produk', 'countProduk'));
     }
 
     public function show($id)
     {
-        $produk = Jfx::find($id);
+        $produk = Produk::find($id);
 
         if (!$produk) {
-            return redirect()->route('jfx.index')->with('error', 'Data tidak ditemukan');
+            return redirect()->route('produk.index')->with('error', 'Data tidak ditemukan');
         }
 
-        return view('jfx.show', compact('produk'));
+        return view('produk.show', compact('produk'));
     }
 
     public function create()
     {
-        return view('jfx.create');
+        return view('produk.create');
     }
 
     public function store(Request $request)
@@ -51,27 +51,27 @@ class JfxController extends Controller
             $image = $request->file('image');
             $originalName = $image->getClientOriginalName();
             $imageName = now()->format('dmY') . '-' . $originalName;
-            $targetPath = 'img/produk/jfx';
+            $targetPath = 'img/produk/produk';
             $image->move(public_path($targetPath), $imageName);
 
             // Simpan path relatif
-            $imagePath = 'jfx/' . $imageName;
+            $imagePath = 'produk/' . $imageName;
         }
 
-        Jfx::create([
+        produk::create([
             'name' => $request->name,
             'deskripsi' => $request->deskripsi,
             'specs' => $request->specs,
-            'image' => $imagePath,  // path: jfx/namafile.jpg
+            'image' => $imagePath,  // path: produk/namafile.jpg
         ]);
 
-        return redirect()->route('jfx.index')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     public function edit(string $id)
     {
-        $produk = Jfx::findOrFail($id);
-        return view('jfx.edit', compact('produk'));
+        $produk = produk::findOrFail($id);
+        return view('produk.edit', compact('produk'));
     }
 
     public function update(Request $request, string $id)
@@ -83,7 +83,7 @@ class JfxController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $produk = Jfx::findOrFail($id);
+        $produk = produk::findOrFail($id);
 
         if ($request->hasFile('image')) {
             if ($produk->image && File::exists(public_path('img/produk/' . $produk->image))) {
@@ -93,10 +93,10 @@ class JfxController extends Controller
             $image = $request->file('image');
             $originalName = $image->getClientOriginalName();
             $imageName = now()->format('dmY') . '-' . $originalName;
-            $targetPath = 'img/produk/jfx';
+            $targetPath = 'img/produk/produk';
             $image->move(public_path($targetPath), $imageName);
 
-            $imagePath = 'jfx/' . $imageName;
+            $imagePath = 'produk/' . $imageName;
         } else {
             $imagePath = $produk->image;
         }
@@ -108,12 +108,12 @@ class JfxController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('jfx.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy(string $id)
     {
-        $produk = Jfx::findOrFail($id);
+        $produk = produk::findOrFail($id);
 
         if ($produk->image && File::exists(public_path('img/produk/' . $produk->image))) {
             File::delete(public_path('img/produk/' . $produk->image));
@@ -121,6 +121,6 @@ class JfxController extends Controller
 
         $produk->delete();
 
-        return redirect()->route('jfx.index')->with('success', 'Produk berhasil dihapus!');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus!');
     }
 }

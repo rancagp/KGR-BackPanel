@@ -1,19 +1,19 @@
 @extends('layouts.admin')
 
-@section('namaPage', 'Edit Produk JFX')
+@section('namaPage', 'Edit Data Produk')
 
 @section('main-content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex align-items-center">
-            <a href="{{ route('jfx.index') }}" class="btn btn-secondary mr-3">
+            <a href="{{ route('produk.index') }}" class="btn btn-secondary mr-3">
                 <i class="fa-solid fa-xmark"></i>
             </a>
-            <h5 class="m-0 font-weight-bold">Form Edit Produk JFX</h5>
+            <h5 class="m-0 font-weight-bold">Form Edit Data Produk</h5>
         </div>
     </div>
     <div class="card-body">
-        <form action="{{ route('jfx.update', $produk->id) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data"
             id="productForm">
             @csrf
             @method('PUT')
@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label for="image">Gambar Produk</label>
                 <div class="mb-2">
-                    <img src="{{ asset('img/produk/jfx/' . $produk->image) }}" alt="{{ $produk->name }}" width="150">
+                    <img src="{{ asset('img/produk/' . $produk->image) }}" alt="{{ $produk->name }}" width="150">
                 </div>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
                 <small>Biarkan kosong jika tidak ingin mengubah gambar</small>
@@ -89,8 +89,7 @@
 </div>
 
 {{-- TinyMCE --}}
-<script src="https://cdn.tiny.cloud/1/rijrac2uxn06a1q296snq7j1fi420fd29r3lc1o12yzq6fwv/tinymce/6/tinymce.min.js"
-    referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/zxbb8ss6iclrki0fopl5gcne91neckqc4e004atop3wf0mi2/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 <script>
     tinymce.init({
             selector: '#specs',

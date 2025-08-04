@@ -1,19 +1,19 @@
 @extends('layouts.admin')
 
-@section('namaPage', 'Tambah Produk JFX')
+@section('namaPage', 'Tambah Data Produk')
 
 @section('main-content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex align-items-center">
-            <a href="{{ route('jfx.index') }}" class="btn btn-secondary mr-3">
+            <a href="{{ route('produk.index') }}" class="btn btn-secondary mr-3">
                 <i class="fa-solid fa-xmark"></i>
             </a>
-            <h5 class="m-0 font-weight-bold">Form Tambah Produk JFX</h5>
+            <h5 class="m-0 font-weight-bold">Form Tambah Data Produk</h5>
         </div>
     </div>
     <div class="card-body">
-        <form id="productForm" action="{{route('jfx.store')}}" method="POST" enctype="multipart/form-data">
+        <form id="productForm" action="{{route('produk.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
@@ -84,8 +84,7 @@
 </div>
 
 {{-- TinyMCE --}}
-<script src="https://cdn.tiny.cloud/1/rijrac2uxn06a1q296snq7j1fi420fd29r3lc1o12yzq6fwv/tinymce/6/tinymce.min.js"
-    referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/zxbb8ss6iclrki0fopl5gcne91neckqc4e004atop3wf0mi2/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 <script>
     tinymce.init({
         selector: '#specs',
