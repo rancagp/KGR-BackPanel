@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('namaPage') - Rifan Financindo Berjangka</title>
+    <title>@yield('namaPage') - Karisma Gazebo Rakyat</title>
 
     <!-- Fonts -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
@@ -31,19 +31,13 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion z-200" id="accordionSidebar">
+        <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion z-200" id="accordionSidebar" style="background-color: #000 !important;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('img/logo-rfb.png') }}" alt="Logo RFB" class="img-fluid"
-                        style="width: 30px; height: auto;">
-                </div>
-                <div class="sidebar-brand-text mx-3">
-                    <div class="d-flex flex-column">
-                        <span>Rifan</span>
-                        <span>Financindo</span>
-                    </div>
+                    <img src="{{ asset('img/logo-KGR.jpg') }}" alt="Logo RFB" class="img-fluid"
+                        style="width: 100px; height: auto;">
                 </div>
             </a>
 
@@ -178,7 +172,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-dark bg-dark topbar mb-4 static-top shadow" style="background-color: #000 !important;">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

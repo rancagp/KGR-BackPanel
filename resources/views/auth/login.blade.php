@@ -78,9 +78,6 @@
                                             {{ __('MASUK') }}
                                         </button>
                                     </div>
-                                    <div class="text-center mt-4">
-                                        <p class="small text-muted mb-0">Belum punya akun? <a href="{{ route('register') }}" class="text-decoration-none" style="color: #ff0000;">Daftar</a></p>
-                                    </div>
                                 </form>
                             </div>
                         </div>
