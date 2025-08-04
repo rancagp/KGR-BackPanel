@@ -5,8 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rifan Financindo Berjangka">
-    <meta name="author" content="Muhammad Faturrahman Putra">
+    <meta name="description" content="Karisma Gazebo Rakyat">
+    <meta name="author" content="Ranca Gigih Pramuditha">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,9 +21,29 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    
+    <style>
+        /* Efek hover untuk nav item */
+        .sidebar .nav-item .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.35rem;
+        }
+        
+        /* Efek hover untuk active nav item */
+        .sidebar .nav-item.active .nav-link {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 0.35rem;
+        }
+        
+        /* Efek hover untuk submenu item */
+        .sidebar .collapse-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0.35rem;
+        }
+    </style>
 
     <!-- Favicon -->
-    <link href="{{ asset('img/cover-login.png') }}" rel="icon" type="image/png">
+    <link href="{{ asset('img/logo-KGR3.png') }}" rel="icon" type="image/png">
 </head>
 
 <body id="page-top">
@@ -36,7 +56,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('img/logo-KGR.jpg') }}" alt="Logo RFB" class="img-fluid"
+                    <img src="{{ asset('img/logo-KGR.jpg') }}" alt="Logo KGR" class="img-fluid"
                         style="width: 100px; height: auto;">
                 </div>
             </a>
@@ -59,28 +79,12 @@
                 {{ __('Menu') }}
             </div>
 
-            <!-- Nav Item - Produk Collapse Menu -->
+            <!-- Nav Item - Produk -->
             <li class="nav-item {{ Nav::isRoute('jfx.*') || Nav::isRoute('spa.*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduk"
-                    aria-expanded="{{ Nav::isRoute('jfx.*') || Nav::isRoute('spa.*') ? 'true' : 'false' }}"
-                    aria-controls="collapseProduk">
+                <a class="nav-link" href="{{ route('jfx.index') }}">
                     <i class="fas fa-box-open"></i>
                     <span>Produk</span>
                 </a>
-                <div id="collapseProduk" class="collapse" aria-labelledby="headingProduk"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Manajemen Produk:</h6>
-                        <a class="collapse-item {{ Nav::isRoute('jfx.*') ? 'active' : '' }}"
-                            href="{{ route('jfx.index') }}">
-                            Produk Multilateral JFX
-                        </a>
-                        <a class="collapse-item {{ Nav::isRoute('spa.*') ? 'active' : '' }}"
-                            href="{{ route('spa.index') }}">
-                            Produk Bilateral (SPA)
-                        </a>
-                    </div>
-                </div>
             </li>
 
             <!-- Nav Item - Profile -->
