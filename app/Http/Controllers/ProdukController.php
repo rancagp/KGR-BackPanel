@@ -32,6 +32,23 @@ class ProdukController extends Controller
         return view('produk.show', compact('produk'));
     }
 
+    /**
+     * Display the specified resource by slug for API.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShowBySlug($slug)
+    {
+        $produk = Produk::where('slug', $slug)->first();
+
+        if (!$produk) {
+            return response()->json(['message' => 'Produk tidak ditemukan'], 404);
+        }
+
+        return response()->json($produk);
+    }
+
     public function create()
     {
         return view('produk.create');
