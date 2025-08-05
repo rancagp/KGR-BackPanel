@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BannerController;
-use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriWakilPialangController;
 use App\Http\Controllers\ProfileWebsiteController;
@@ -46,15 +46,15 @@ Route::prefix('produk/spa')->name('spa.')->group(function () {
     Route::delete('/{id}/delete', [SpaController::class, 'destroy'])->name('destroy');
 });
 
-// Berita
-Route::prefix('berita')->name('berita.')->group(function () {
-    Route::get('/', [BeritaController::class, 'index'])->name('index');
-    Route::post('/store', [BeritaController::class, 'store'])->name('store');
-    Route::get('/tambah', [BeritaController::class, 'create'])->name('create');
-    Route::put('/{id}/update', [BeritaController::class, 'update'])->name('update');
-    Route::get('/{id}/edit', [BeritaController::class, 'edit'])->name('edit');
-    Route::get('/{id}/show', [BeritaController::class, 'show'])->name('show');
-    Route::delete('/{id}/delete', [BeritaController::class, 'destroy'])->name('destroy');
+// Galeri
+Route::prefix('galeri')->name('galeri.')->group(function () {
+    Route::get('/', [GaleriController::class, 'index'])->name('index');
+    Route::post('/store', [GaleriController::class, 'store'])->name('store');
+    Route::get('/tambah', [GaleriController::class, 'create'])->name('create');
+    Route::put('/{id}/update', [GaleriController::class, 'update'])->name('update');
+    Route::get('/{id}/edit', [GaleriController::class, 'edit'])->name('edit');
+    Route::get('/{id}/show', [GaleriController::class, 'show'])->name('show');
+    Route::delete('/{id}/delete', [GaleriController::class, 'destroy'])->name('destroy');
 });
 
 // Wakil Pialang & Kategori

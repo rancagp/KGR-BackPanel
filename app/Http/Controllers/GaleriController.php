@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\berita;
+use App\Models\galeri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class BeritaController extends Controller
+class GaleriController extends Controller
 {
     public function __construct()
     {
@@ -18,29 +18,29 @@ class BeritaController extends Controller
         $kategori = $request->query('kategori');
         $status = $request->query('status');
 
-        $query = Berita::query();
+        $query = galeri::query();
 
         if ($status === 'draft') {
-            // Tampilkan hanya berita dengan status draft
+            // Tampilkan hanya galeri dengan status draft
             $query->where('status', 'draft');
         } elseif ($kategori) {
             // Jika kategori dipilih, dan status bukan draft, tampilkan berdasarkan kategori dan status published
             $query->where('kategori', $kategori)
                 ->where('status', 'published');
         } else {
-            // Default: tampilkan semua berita yang published
+            // Default: tampilkan semua galeri yang published
             $query->where('status', 'published');
         }
 
-        $beritaFiltered = $query->latest()->get();
-        $countBerita = $beritaFiltered->count();
+        $galeriFiltered = $query->latest()->get();
+        $countGaleri = $galeriFiltered->count();
 
-        return view('berita.index', compact('beritaFiltered', 'countBerita'));
+        return view('galeri.index', compact('galeriFiltered', 'countGaleri'));
     }
 
     public function create()
     {
-        return view('berita.create');
+        return view('galeri.create');
     }
 
     public function store(Request $request)
@@ -63,47 +63,47 @@ class BeritaController extends Controller
             $judulSlug = str_replace(' ', '-', strtolower($request->judul));
             $imageName = $tanggal . '-' . $judulSlug . '.' . $image->getClientOriginalExtension();
 
-            $image->move(public_path('img/berita'), $imageName);
+            $image->move(public_path('img/galeri'), $imageName);
 
             $data['image'] = $imageName;
         }
 
-        berita::create($data);
+        galeri::create($data);
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil ditambahkan.');
     }
 
     public function show(string $id)
     {
         try {
-            // Mencari berita berdasarkan ID atau akan gagal jika tidak ditemukan
-            $berita = berita::findOrFail($id);
+            // Mencari galeri berdasarkan ID atau akan gagal jika tidak ditemukan
+            $galeri = galeri::findOrFail($id);
 
-            // Mengembalikan view dengan data berita yang ditemukan
-            return view('berita.show', compact('berita'));
+            // Mengembalikan view dengan data galeri yang ditemukan
+            return view('galeri.show', compact('galeri'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // Jika berita tidak ditemukan, arahkan ke halaman berita.index dengan pesan error
-            return redirect()->route('berita.index')->with('error', 'Data tidak ditemukan');
+            // Jika galeri tidak ditemukan, arahkan ke halaman galeri.index dengan pesan error
+            return redirect()->route('galeri.index')->with('error', 'Data tidak ditemukan');
         }
     }
 
     public function edit(string $id)
     {
         try {
-            // Mencari berita berdasarkan ID atau akan gagal jika tidak ditemukan
-            $berita = berita::findOrFail($id);
+            // Mencari galeri berdasarkan ID atau akan gagal jika tidak ditemukan
+            $galeri = galeri::findOrFail($id);
 
-            // Mengembalikan view dengan data berita yang ditemukan
-            return view('berita.edit', compact('berita'));
+            // Mengembalikan view dengan data galeri yang ditemukan
+            return view('galeri.edit', compact('galeri'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            // Jika berita tidak ditemukan, arahkan ke halaman berita.index dengan pesan error
-            return redirect()->route('berita.index')->with('error', 'Data tidak ditemukan');
+            // Jika galeri tidak ditemukan, arahkan ke halaman galeri.index dengan pesan error
+            return redirect()->route('galeri.index')->with('error', 'Data tidak ditemukan');
         }
     }
 
     public function update(Request $request, string $id)
     {
-        $berita = berita::findOrFail($id);
+        $galeri = galeri::findOrFail($id);
 
         // Menambahkan validasi untuk kategori
         $request->validate([
@@ -119,8 +119,8 @@ class BeritaController extends Controller
 
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
-            if ($berita->image && File::exists(public_path($berita->image))) {
-                File::delete(public_path($berita->image));
+            if ($galeri->image && File::exists(public_path($galeri->image))) {
+                File::delete(public_path($galeri->image));
             }
 
             $image = $request->file('image');
@@ -128,27 +128,27 @@ class BeritaController extends Controller
             $judulSlug = str_replace(' ', '-', strtolower($request->judul));
             $imageName = $tanggal . '-' . $judulSlug . '.' . $image->getClientOriginalExtension();
 
-            $image->move(public_path('img/berita'), $imageName);
+            $image->move(public_path('img/galeri'), $imageName);
 
             $data['image'] = $imageName;
         }
 
-        $berita->update($data);
+        $galeri->update($data);
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui.');
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui.');
     }
 
     public function destroy(string $id)
     {
-        $berita = berita::findOrFail($id);
+        $galeri = galeri::findOrFail($id);
 
         // Hapus gambar jika ada
-        if ($berita->image && File::exists(public_path($berita->image))) {
-            File::delete(public_path($berita->image));
+        if ($galeri->image && File::exists(public_path($galeri->image))) {
+            File::delete(public_path($galeri->image));
         }
 
-        $berita->delete();
+        $galeri->delete();
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus.');
     }
 }

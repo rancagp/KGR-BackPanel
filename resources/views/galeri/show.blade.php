@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('namaPage')
-{{$berita->judul}}
+{{$galeri->judul}}
 @endsection
 
 @section('main-content')
@@ -23,26 +23,26 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{{ route('berita.index') }}" class="btn btn-secondary btn-sm shadow">
+            <a href="{{ route('galeri.index') }}" class="btn btn-secondary btn-sm shadow">
                 <i class="fa-solid fa-xmark"></i>
             </a>
-            <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-primary btn-sm shadow">
-                Edit Berita
+            <a href="{{ route('galeri.edit', $galeri->id) }}" class="btn btn-primary btn-sm shadow">
+                Edit Galeri
             </a>
         </div>
     </div>
     <div class="card-body">
         <div class="d-flex justify-content-center align-items-center flex-column mb-3">
-            <!-- Menampilkan gambar berita dengan kelas img-fluid untuk membuatnya responsif -->
-            <h4 class="mt-3 font-weight-bold text-center">{{ $berita->judul }}</h4>
-            @if($berita->image)
-            <img src="{{ asset('img/berita/' . $berita->image) }}" alt="{{ $berita->judul }}" class="img-fluid rounded"
+            <!-- Menampilkan gambar galeri dengan kelas img-fluid untuk membuatnya responsif -->
+            <h4 class="mt-3 font-weight-bold text-center">{{ $galeri->judul }}</h4>
+            @if($galeri->image)
+            <img src="{{ asset('img/galeri/' . $galeri->image) }}" alt="{{ $galeri->judul }}" class="img-fluid rounded"
                 style="max-height: 300px; width: auto; height: 100%;" loading="lazy">
             @endif
         </div>
         <div>
-            <!-- Menampilkan isi berita -->
-            <p class="lead">{!! $berita->isi !!}</p>
+            <!-- Menampilkan isi galeri -->
+            <p class="lead">{!! $galeri->isi !!}</p>
         </div>
     </div>
 </div>

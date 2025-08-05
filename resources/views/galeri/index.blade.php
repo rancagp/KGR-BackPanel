@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('namaPage', 'Berita')
+@section('namaPage', 'Galeri')
 
 @section('main-content')
 
@@ -36,20 +36,20 @@
                 @if (request('status') === 'draft')
                 Draft
                 @elseif (request('kategori') === 'Pengumuman' || request('kategori') === null)
-                Berita Pengumuman
+                Galeri Pengumuman
                 @else
-                Berita Info & Kegiatan
+                Galeri Info & Kegiatan
                 @endif
             </h5>
 
-            <a href="{{ route('berita.create') }}" class="btn btn-primary btn-sm shadow">
-                Tambah Berita
+            <a href="{{ route('galeri.create') }}" class="btn btn-primary btn-sm shadow">
+                Tambah Galeri
             </a>
         </div>
     </div>
     <div class="card-body">
         <!-- Tombol Kategori -->
-        <form method="GET" action="{{ route('berita.index') }}" class="mb-3">
+        <form method="GET" action="{{ route('galeri.index') }}" class="mb-3">
             <div class="form-inline">
                 <select name="kategori" class="form-control form-control-sm mr-2" onchange="this.form.submit()">
                     <option value="">Pilih Kategori</option>
@@ -59,12 +59,12 @@
                         & Kegiatan</option>
                 </select>
 
-                <a href="{{ route('berita.index', ['status' => 'draft']) }}"
+                <a href="{{ route('galeri.index', ['status' => 'draft']) }}"
                     class="btn btn-sm {{ request('status') === 'draft' ? 'btn-primary' : 'btn-secondary' }} mx-2">
                     Draft
                 </a>
 
-                <a href="{{ route('berita.index') }}" class="btn btn-sm btn-danger ml-2">Reset</a>
+                <a href="{{ route('galeri.index') }}" class="btn btn-sm btn-danger ml-2">Reset</a>
             </div>
         </form>
 
@@ -81,46 +81,46 @@
                 </thead>
 
                 <tbody>
-                    @forelse ($beritaFiltered as $index => $berita)
+                    @forelse ($galeriFiltered as $index => $galeri)
                     <tr>
                         <td class="text-center align-middle">{{ $index + 1 }}</td>
                         <td class="text-left align-middle" style="max-width: 350px;">
-                            {{ Str::limit(strip_tags($berita->judul), 90, '...') }}</td>
-                        <td class="text-center align-middle">{{ $berita->kategori }}</td>
+                            {{ Str::limit(strip_tags($galeri->judul), 90, '...') }}</td>
+                        <td class="text-center align-middle">{{ $galeri->kategori }}</td>
                         <td class="text-center align-middle" style="max-width: 130px;">{{
-                            $berita->created_at->format('D, d F Y, H:i') }}</td>
+                            $galeri->created_at->format('D, d F Y, H:i') }}</td>
                         <td class="align-middle">
                             <div class="d-flex justify-content-center">
-                                <a href="{{ Route('berita.show', $berita->id) }}"
+                                <a href="{{ Route('galeri.show', $galeri->id) }}"
                                     class="btn btn-sm btn-success w-100 mr-1">Lihat</a>
-                                <a href="{{ route('berita.edit', $berita->id) }}"
+                                <a href="{{ route('galeri.edit', $galeri->id) }}"
                                     class="btn btn-sm btn-primary w-100 mx-1">Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger w-100 ml-1" data-toggle="modal"
-                                    data-target="#deleteModal{{ $berita->id }}">
+                                    data-target="#deleteModal{{ $galeri->id }}">
                                     Hapus
                                 </button>
                             </div>
 
                             <!-- Modal Konfirmasi Hapus -->
-                            <div class="modal fade" id="deleteModal{{ $berita->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="deleteModalLabel{{ $berita->id }}" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal{{ $galeri->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="deleteModalLabel{{ $galeri->id }}" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel{{ $berita->id }}">Konfirmasi
+                                            <h5 class="modal-title" id="deleteModalLabel{{ $galeri->id }}">Konfirmasi
                                                 Hapus</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Apakah kamu yakin ingin menghapus berita <strong>"{{ $berita->judul
+                                            Apakah kamu yakin ingin menghapus galeri <strong>"{{ $galeri->judul
                                                 }}"</strong>?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Batal</button>
-                                            <form action="{{ route('berita.destroy', $berita->id) }}" method="POST">
+                                            <form action="{{ route('galeri.destroy', $galeri->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Ya, Hapus</button>
@@ -134,7 +134,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center">Belum ada berita.</td>
+                        <td colspan="5" class="text-center">Belum ada galeri.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -143,7 +143,7 @@
     </div>
     <div class="card-footer">
         <div class="text-right text-muted">
-            <p class="mb-0"><strong>Jumlah Berita:</strong> <span>{{ $countBerita }} Berita</span></p>
+            <p class="mb-0"><strong>Jumlah Galeri:</strong> <span>{{ $countGaleri }} Galeri</span></p>
         </div>
     </div>
 </div>

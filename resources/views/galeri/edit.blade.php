@@ -1,27 +1,32 @@
 @extends('layouts.admin')
 
-@section('namaPage', 'Tambah Berita')
+@section('namaPage', 'Edit Galeri')
 
 @section('main-content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex align-items-center">
-            <a href="{{ route('berita.index') }}" class="btn btn-secondary mr-3">
+            <a href="{{ route('galeri.index') }}" class="btn btn-secondary mr-3">
                 <i class="fa-solid fa-xmark"></i>
             </a>
-            <h5 class="m-0 font-weight-bold">Form Tambah Berita</h5>
+            <h5 class="m-0 font-weight-bold">Form Edit Galeri</h5>
         </div>
     </div>
     <div class="card-body">
-        <form id="productForm" action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data">
+        <!-- Mengubah route ke 'galeri.update' dan menambahkan method PUT -->
+        <form id="productForm" action="{{ route('galeri.update', $galeri->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
+            @method('PUT')
 
-            <!-- Status Berita (Pindah ke Paling Atas) -->
+            <!-- Status galeri (Pindah ke Paling Atas) -->
             <div class="form-group">
-                <label for="status">Status Berita</label>
+                <label for="status">Status Galeri</label>
                 <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
-                    <option value="draft" {{ old('status')=='draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="published" {{ old('status')=='published' ? 'selected' : '' }}>Published</option>
+                    <option value="draft" {{ old('status', $galeri->status) == 'draft' ? 'selected' : '' }}>Draft
+                    </option>
+                    <option value="published" {{ old('status', $galeri->status) == 'published' ? 'selected' : ''
+                        }}>Published</option>
                 </select>
                 @error('status')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -31,8 +36,12 @@
             <div class="d-flex">
                 <div class="form-group w-100 mr-1">
                     <label for="image">Gambar</label>
-                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
-                        required>
+                    @if ($galeri->image)
+                    <!-- Menampilkan gambar yang sudah ada -->
+                    <img src="{{ asset('img/galeri/' . $galeri->image) }}" alt="Gambar Galeri" class="mt-2" width="100">
+                    @endif
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
+                        name="image">
                     @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -42,10 +51,10 @@
                     <label for="kategori">Kategori</label>
                     <select class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori"
                         required>
-                        <option value="Info & Kegiatan" {{ old('kategori')=='Info & Kegiatan' ? 'selected' : '' }}>Info
-                            & Kegiatan</option>
-                        <option value="Pengumuman" {{ old('kategori')=='Pengumuman' ? 'selected' : '' }}>Pengumuman
-                        </option>
+                        <option value="Info & Kegiatan" {{ old('kategori', $galeri->kategori) == 'Info & Kegiatan' ?
+                            'selected' : '' }}>Info & Kegiatan</option>
+                        <option value="Pengumuman" {{ old('kategori', $galeri->kategori) == 'Pengumuman' ? 'selected' :
+                            '' }}>Pengumuman</option>
                     </select>
                     @error('kategori')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -54,18 +63,18 @@
             </div>
 
             <div class="form-group">
-                <label for="judul">Judul Berita</label>
+                <label for="judul">Judul Galeri</label>
                 <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul"
-                    value="{{ old('judul') }}" required>
+                    value="{{ old('judul', $galeri->judul) }}" required>
                 @error('judul')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="isi">Isi Berita</label>
+                <label for="isi">Isi Galeri</label>
                 <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi" rows="8"
-                    required>{{ old('isi') }}</textarea>
+                    required>{{ old('isi', $galeri->isi) }}</textarea>
                 @error('isi')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -92,7 +101,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin menyimpan Berita ini?
+                Apakah Anda yakin ingin menyimpan perubahan pada Galeri ini?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -103,8 +112,7 @@
 </div>
 
 {{-- TinyMCE --}}
-<script src="https://cdn.tiny.cloud/1/rijrac2uxn06a1q296snq7j1fi420fd29r3lc1o12yzq6fwv/tinymce/6/tinymce.min.js"
-    referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/zxbb8ss6iclrki0fopl5gcne91neckqc4e004atop3wf0mi2/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 <script>
     tinymce.init({
         selector: '#isi',

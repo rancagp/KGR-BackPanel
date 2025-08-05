@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\BeritaController;
+use App\Http\Controllers\Api\GaleriController;
 use App\Http\Controllers\Api\KategoriWakilPialangController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\SpaController;
@@ -23,8 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/berita', [BeritaController::class, 'index']);
-Route::get('/berita/{slug}', [BeritaController::class, 'show']);
+Route::get('/galeri', [GaleriController::class, 'index']);
+Route::get('/galeri/{slug}', [GaleriController::class, 'show']);
 
 // API Produk
 Route::get('/produk', [\App\Http\Controllers\Api\ProdukController::class, 'index']);
@@ -36,7 +36,3 @@ Route::get('/spa/{slug}', [SpaController::class, 'show']);
 Route::get('/kategori-wakil-pialang', [KategoriWakilPialangController::class, 'index']);
 
 Route::get('/wakil-pialang', [WakilPialangController::class, 'index']);
-
-// API Produk
-//Route::get('/produk', [\App\Http\Controllers\ProdukController::class, 'index']);
-//Route::get('/produk/{slug}', [\App\Http\Controllers\ProdukController::class, 'apiShowBySlug']);

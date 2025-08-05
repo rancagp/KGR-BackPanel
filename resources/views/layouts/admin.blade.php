@@ -88,10 +88,10 @@
             </li>
 
             <!-- Nav Item - Profile -->
-            <li class="nav-item {{ Nav::isRoute('berita.*') }}">
-                <a class="nav-link" href="{{ route('berita.index') }}">
+            <li class="nav-item {{ Nav::isRoute('galeri.*') }}">
+                <a class="nav-link" href="{{ route('galeri.index') }}">
                     <i class="fa-solid fa-newspaper"></i>
-                    <span>{{ __('Berita') }}</span>
+                    <span>{{ __('Galeri') }}</span>
                 </a>
             </li>
 

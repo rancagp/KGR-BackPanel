@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Berita extends Model
+class galeri extends Model
 {
     use HasFactory;
 
-    protected $table = 'beritas';
+    protected $table = 'galeris';
 
     protected $fillable = [
         'image',
@@ -26,12 +26,12 @@ class Berita extends Model
     {
         parent::boot();
 
-        static::creating(function ($berita) {
-            $berita->slug = Str::slug($berita->judul);
+        static::creating(function ($galeri) {
+            $galeri->slug = Str::slug($galeri->judul);
         });
 
-        static::updating(function ($berita) {
-            $berita->slug = Str::slug($berita->judul);
+        static::updating(function ($galeri) {
+            $galeri->slug = Str::slug($galeri->judul);
         });
     }
 }
