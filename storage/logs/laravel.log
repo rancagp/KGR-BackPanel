@@ -23294,3 +23294,7 @@ Did you mean one of these?
 #54 C:\\laragon\\www\\KarismaGazeboRakyat\\backend\\public\\index.php(54): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #55 {main}
 "} 
+[2025-08-05 23:23:52] local.ERROR: Out of memory (allocated 18874368 bytes) (tried to allocate 131072 bytes) {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Out of memory (allocated 18874368 bytes) (tried to allocate 131072 bytes) at C:\\laragon\\www\\KarismaGazeboRakyat\\backend\\vendor\\composer\\ClassLoader.php:571)
+[stacktrace]
+#0 {main}
+"} 
